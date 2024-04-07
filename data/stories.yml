@@ -9,6 +9,28 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
+
+- story: hospital search happy path
+  steps:
+  - intent: greet
+  - action: utter_how_can_i_help
+  - search_provider{"facility_type":"hospital", "location": "San Francisco" }
+  - action: action_facility_search
+  - intent: thanks
+  - action: utter_goodbye
+
+- story: hospital search + location
+  steps:
+  - intent: greet
+  - action: utter_how_can_i_help
+  - intent: search_provider{"facility_type":"hospital"}
+  - action: utter_ask_location
+  - intent: inform{"location":"San Francisco"}
+  - action: action_facility_search
+  - intent: thanks
+  - action: utter_goodbye
+
+
 - story: sad path 1
   steps:
   - intent: greet
@@ -28,3 +50,16 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+
+- story: goodbye
+  steps:
+  - intent: goodbye
+
+- story: thank you
+  steps:
+    - intent: thankyou
+    - action: utter_thankyou
+
+
+
